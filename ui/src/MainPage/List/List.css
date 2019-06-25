@@ -1,0 +1,66 @@
+.list{
+    border: 2px solid #EDEDF0;
+    background-color: #FFFFFF;
+    padding: 0;
+}
+
+.item{
+    padding: 15px;
+    
+    border: 2px solid #EDEDF0;
+    border-right-style: none;
+    border-left-style: none;
+    border-bottom-style: none;
+    width:auto;
+    margin-left: -110px;
+    margin-right: -70px;
+
+}
+
+.name{
+    color: #494E61;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-family: "Open Sans";
+    padding-left: 50px;
+    width: 50vh;
+    font-weight: 600;
+
+}
+
+.status{
+    position:relative;
+    width: 50vh;
+
+}
+
+.nameTop {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding-left: 65px;
+    width: 50vh;
+    color: #9CA7D3;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-left: -110px;
+}
+.statusTop {
+
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    padding-left: 15px;
+    text-align: left;
+    color: #9CA7D3;
+    font-family: "Open Sans";
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+
+ul{
+    list-style-type: none;
+ 
+}
+
