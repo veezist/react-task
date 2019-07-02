@@ -35,13 +35,14 @@ export class DropDown extends React.Component{
 
 
     render(){
-      
+     const {...other}=this.props
+     
         return (
        <FlexView className='dropdown' hAlignContent='right'>
            {
           this.state.showMenu
             ? (
-                    <Menu turn={this.props.turn} server={this.props.server}/>
+                    <Menu {...other}/>
             )
             : (
                 <FlexView hAlignContent='center' vAlignContent='center' style={{width:50, minHeight: 15}} onClick={this.showMenu}>
@@ -57,7 +58,7 @@ export class DropDown extends React.Component{
     }
 
     DropDown.propTypes={
-      getServer: PropTypes.func.isRequired,
+     
       turn: PropTypes.func.isRequired,
       server: PropTypes.object.isRequired
   }

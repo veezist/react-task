@@ -40,112 +40,38 @@ const statusStyles={
     }
 }
 
-export class ListItem extends React.Component{
+export const ListItem = ({server,...other}) => {
 
-    constructor(props){
-        super(props);
-        this.state={
-            server:this.props.server
-        }
-        this.fetchServer=this.fetchServer.bind(this);
-        this.turnOnOff=this.turnOnOff.bind(this);
-    };
-
-    turnOnOff(id,mode) {
-        
-
-        switch(mode){
-                case 'ON':
-                            if(this.state.server.status==='OFFLINE')
-                        {   
-                            fetch('http://localhost:4454/servers/'+id+'/on', { method: 'PUT'})
-                            .then(response => response.json()).then(data=>this.setState({
-                                server:data
-                            })).catch((error) => {
-                                console.error(error);
-                            });
-                        }
-                        return null;
-                case 'OFF':
-                        if(this.state.server.status==='ONLINE')
-                        { 
-                            fetch('http://localhost:4454/servers/'+id+'/off', { method: 'PUT'})
-                            .then(response => response.json()).then(data=>this.setState({
-                             server:data
-                         })).catch((error) => {
-                            console.error(error);
-                        })
-                        }
-                         return null;
-
-                case 'REBOOT':
-                         fetch('http://localhost:4454/servers/'+id+'/reboot', { method: 'PUT'})
-                         .then(response => response.json()).then(data=>this.setState({
-                             server:data
-                         })).catch((error) => {
-                            console.error(error);
-                        });
-                         this.checkIfRebooted();
-                         return null;
-            
-            default: return true;  
-        }  
-    };
-
-    async fetchServer(id){
-        if(this.state.server.status==='REBOOTING')
-       { 
-           fetch(`http://localhost:4454/servers/`+id, {method: 'GET'})
-            .then((response) => response.json())
-            .then(data =>
-              this.setState({
-                server: data,    
-              }))
-         .catch((error) => {
-             console.error(error);
-         });
-        }};
-
-
-
-    ChooseStatus(status){
+    const ChooseStatus = (status) => {
 
         switch(status){
             case 'ONLINE':
-                return  <FlexView vAlignContent='center'  className='status'><div  style={statusStyles.online}></div><p style={statusStyles.onlineText}>{status}</p></FlexView>;
+                return <FlexView vAlignContent='center'  className='status'><div  style={statusStyles.online}></div><p style={statusStyles.onlineText}>{status}</p></FlexView>;
             case 'OFFLINE':
-                return  <FlexView vAlignContent='center'  className='status'><img style={statusStyles.offline} src={xCross} alt='cross'/> <p style={statusStyles.offlineText}>{status}</p></FlexView>;
+                return <FlexView vAlignContent='center'  className='status'><img style={statusStyles.offline} src={xCross} alt='cross'/> <p style={statusStyles.offlineText}>{status}</p></FlexView>;
             case 'REBOOTING':
-                return  <FlexView vAlignContent='center' className='status'><div style={statusStyles.rebooting}></div><p style={statusStyles.rebooting}>{status}...</p></FlexView>;
+                return <FlexView vAlignContent='center' className='status'><div style={statusStyles.rebooting}></div><p style={statusStyles.rebooting}>{status}...</p></FlexView>;
             default: 
             return null;
         }
     }
-
-    checkIfRebooted(){
-       
-        this.timer = setInterval(()=> this.fetchServer(this.state.server.id), 1000);
-       
-       }
-
-
-    render(){
+    
 
         return (
             <FlexView  className='item'>
                 <FlexView  hAlignContent='left' className='name'>
-                    <p>{this.props.server.name}</p>
+                    <p>{server.name}</p>
                 </FlexView>
                 <FlexView  hAlignContent='right' className='status'>
-               {this.ChooseStatus(this.state.server.status===null?this.props.server.status :this.state.server.status)}
+               {ChooseStatus(server.status)}
                 </FlexView>
                 <FlexView    vAlignContent='center'>
-                <DropDown getServer={this.fetchServer} turn={this.turnOnOff} server={this.state.server} />
+                <DropDown {...other} server={server} />
                 </FlexView>
             </FlexView>
         )
     }
-}
+
 
 ListItem.propTypes={
     server: PropTypes.object.isRequired

@@ -2,41 +2,40 @@ import React from 'react';
 import FlexView from 'react-flexview/lib';
 import PropTypes from 'prop-types';
 
-export class Menu extends React.Component
-{ 
+export const Menu = ({server,turnOnOff,...other}) =>{ 
 
-       handleOnChange = () => {  
-        this.props.turn(this.props.server.id,'ON');     
+
+       const handleOnChange = () => {  
+        turnOnOff(server,'ON');     
        }
        
-       handleOffChange = () => { 
-        this.props.turn(this.props.server.id,'OFF');
+       const handleOffChange = () => { 
+        turnOnOff(server,'OFF');
        }
 
-       handleRebootChange = () => {  
-        this.props.turn(this.props.server.id,'REBOOT');
+       const handleRebootChange = () => {  
+        turnOnOff(server,'REBOOT');
        }
 
-    
-    render()
-   { 
+       
     
     return (
-        this.props.server.status==='ONLINE'
+      
+        server.status==='ONLINE'
         ? (
           <FlexView column className="menu">
-            <button onClick={this.handleOffChange}>Turn off</button>
-            <button onClick={this.handleRebootChange}>Reboot </button>
+            <button onClick={handleOffChange}>Turn off</button>
+            <button onClick={handleRebootChange}>Reboot </button>
           </FlexView>
         )
         : (
           <FlexView column className="menu">
-          <button onClick={this.handleOnChange}>Turn on</button>
+          <button onClick={handleOnChange}>Turn on</button>
         </FlexView>
 
     )
     )}
-  }
+  
 
 Menu.propTypes={
     turn: PropTypes.func.isRequired,

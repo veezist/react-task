@@ -1,54 +1,45 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {fetchSingleServerSuccess,fetchPosts} from '../actions/actions';
 import {Header} from './Header/Header'
 import FlexView from 'react-flexview/lib';
 import {List} from './List/List';
+import {getServers, getFilteredServers} from '../reducers/reducer';
 
+class MainPage extends React.Component{
 
+    componentWillMount(){
+         const {onFetchPosts} = this.props;
+         onFetchPosts();
+      };
 
-export class MainPage extends React.Component{
-
-    constructor(props){
-        super(props);
-        this.state={
-            servers:[],
-            searchedServers: [],
-        };
-        
-        this.handleTextChange = this.handleTextChange.bind(this);
-        this.fetchPosts=this.fetchPosts.bind(this);
-    }
-  
-
-    async fetchPosts() {
-        fetch(`http://localhost:4454/servers`)
-          .then(response => response.json())
-          .then(
-            data =>
-              this.setState({
-                servers: data,
-                  searchedServers: data,  
-              })
-          ) 
-      }
-
-    handleTextChange(searchedServers) {
-        this.setState({
-            searchedServers: searchedServers
-        });
-    }
-
-    componentDidMount(){
-        this.fetchPosts();
-    }
+    
 
     render(){
-        
+
         return (
         <FlexView column style={{width:'60%', margin: 'auto'}}>
-        <Header onTextChange={this.handleTextChange} servers={this.state.servers} searchedServers={this.state.searchedServers}/>
-        <List  searchedServers={this.state.searchedServers} />
+        <Header {...this.props}/>
+       <List {...this.props}  />
         </FlexView>
             
         )
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        servers:getServers(state),
+        filteredServers:getFilteredServers(state)
+    };
+  };
+  
+  
+  const mapDispatchToProps = dispatch => bindActionCreators({
+    onFetchPosts: fetchPosts,
+    onFetchSingleServerSuccess:fetchSingleServerSuccess
+  }, dispatch);
+  
+  export default connect(mapStateToProps,mapDispatchToProps)(MainPage);
+  
