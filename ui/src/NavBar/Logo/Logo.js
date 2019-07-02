@@ -1,5 +1,4 @@
 import React from 'react';
-import './Logo.css';
 import FlexView from 'react-flexview';
 
 export const Logo = () =>{

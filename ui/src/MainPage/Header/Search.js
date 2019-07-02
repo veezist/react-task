@@ -1,7 +1,6 @@
 import React from 'react';
 import FlexView from 'react-flexview/lib';
 import search from './search.svg';
-import './Header.css';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -18,7 +17,7 @@ constructor(props){
 handleChange = (e) => {
   const {onFilterServers,servers,filteredServers}=this.props
 
-    let searchString = e.target.value.replace(/&\/\\#,+()$~%.'":*?<>{}/g, '').toLowerCase();
+    const searchString = e.target.value.replace(/&\/\\#,+()$~%.'":*?<>{}/g, '').toLowerCase();
    
     let allServers;
    if(allServers===undefined)
@@ -41,21 +40,19 @@ handleChange = (e) => {
 
   
     render() {
-
-console.log(this.props)
         return (
           <FlexView className='searchStyle'>
             <img className='magnifyingGlass'  src={search} alt='tak'/>
             <input onChange={this.handleChange} className='searchInput'  type="text" placeholder="Search" />
           </FlexView>
         );
-      }
-      
+      } 
 }
 
 Search.propTypes={
   onTextChange: PropTypes.func
 }
+
 const mapStateToProps = state => {
   return { 
     servers: getServers(state),
@@ -71,3 +68,10 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 
 export default connect(mapStateToProps,mapDispatchToProps)(Search);
 
+Search.propTypes={
+  servers: PropTypes.array.isRequired,
+  filteredServers: PropTypes.array.isRequired,
+  onFetchPosts: PropTypes.func.isRequired,
+  onFetchSingleServerSuccess: PropTypes.func.isRequired,
+  onFilterServers: PropTypes.func.isRequired
+}

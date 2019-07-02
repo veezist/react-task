@@ -1,0 +1,11 @@
+@mixin fixed-size($w,$h){
+width:$w;
+height: $h;
+}
+@mixin font($size,$weight,$family:'Montserrat'){
+    font-size:$size;
+    font-weight: $weight;
+    font-family:$family;
+}
+
+$columnTitleColor:#9CA7D3;

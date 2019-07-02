@@ -20,9 +20,11 @@ export const Header = ({filteredServers,...other}) => {
            
         )
     }
-    Header.propTypes={
-        onTextChange: PropTypes.func,
-        servers: PropTypes.array.isRequired,
-        searchedServers: PropTypes.array.isRequired
-      }
-      
+    
+Header.propTypes={
+    servers: PropTypes.array.isRequired,
+    filteredServers: PropTypes.array.isRequired,
+    onFetchPosts: PropTypes.func.isRequired,
+    onFetchSingleServerSuccess: PropTypes.func.isRequired
+    }
+    

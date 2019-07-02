@@ -1,11 +1,7 @@
 import React from 'react';
 import FlexView from 'react-flexview/lib';
-import './dropdown.css';
 import {Menu} from './Menu';
 import PropTypes from 'prop-types';
-
-
-
 
 export class DropDown extends React.Component{
     constructor(props) {
@@ -14,20 +10,15 @@ export class DropDown extends React.Component{
         this.state = {
           showMenu: false,
         };
-        
-        this.showMenu = this.showMenu.bind(this);
-        this.closeMenu = this.closeMenu.bind(this);
       }
     
-     
-      showMenu(event) {
-        event.preventDefault();
+      showMenu = () => {
         this.setState({ showMenu: true }, () => {
           document.addEventListener('click', this.closeMenu);
         });
       }
 
-      closeMenu() {
+      closeMenu = () => {
         this.setState({ showMenu: false }, () => {
           document.removeEventListener('click', this.closeMenu);
         });
@@ -38,7 +29,7 @@ export class DropDown extends React.Component{
      const {...other}=this.props
      
         return (
-       <FlexView className='dropdown' hAlignContent='right'>
+       <FlexView  hAlignContent='right'>
            {
           this.state.showMenu
             ? (
@@ -57,8 +48,11 @@ export class DropDown extends React.Component{
         }
     }
 
-    DropDown.propTypes={
-     
-      turn: PropTypes.func.isRequired,
-      server: PropTypes.object.isRequired
+DropDown.propTypes={
+  servers: PropTypes.array,
+  onFetchPosts: PropTypes.func,
+  onFetchSingleServerSuccess: PropTypes.func,
+  server: PropTypes.object,
+  turnOnOff:PropTypes.func
   }
+  

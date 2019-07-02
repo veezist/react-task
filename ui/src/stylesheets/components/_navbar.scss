@@ -1,0 +1,26 @@
+.prostok-t-2 {
+@include fixed-size(100%,73px);
+
+    background-color:#494E61;
+        .elipse {	
+            @include fixed-size(14px,14px);
+            border: 2px solid #7D82F7;
+            background-color: #494E61;
+            border-radius: 60px;
+            margin: 20px 10px 20px 40px;
+        }
+        
+        .prostok-t-3 {	
+            @include fixed-size(2px,35px);
+            background-color: #757B8F;
+            margin: 20px;
+            margin-left: 30px;
+        }
+        
+        .siteName{
+            @include font(14px,bold);
+            color: #FFFFFF;
+            letter-spacing: 1px;
+          
+        }
+}

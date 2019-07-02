@@ -1,6 +1,5 @@
 import React from 'react';
 import FlexView from 'react-flexview/lib';
-import './List.css';
 import xCross from './close.svg';
 import {DropDown} from './DropDown/DropDown';
 import PropTypes from 'prop-types';
@@ -62,10 +61,10 @@ export const ListItem = ({server,...other}) => {
                 <FlexView  hAlignContent='left' className='name'>
                     <p>{server.name}</p>
                 </FlexView>
-                <FlexView  hAlignContent='right' className='status'>
+                <FlexView  hAlignContent='left' className='status'>
                {ChooseStatus(server.status)}
                 </FlexView>
-                <FlexView    vAlignContent='center'>
+                <FlexView   hAlignContent='right' className='dropdown' vAlignContent='center'>
                 <DropDown {...other} server={server} />
                 </FlexView>
             </FlexView>
@@ -74,6 +73,7 @@ export const ListItem = ({server,...other}) => {
 
 
 ListItem.propTypes={
-    server: PropTypes.object.isRequired
-}
+    server: PropTypes.object.isRequired,
+    turnOnOff:PropTypes.func.isRequired
+    }
 

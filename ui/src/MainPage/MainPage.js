@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {fetchSingleServerSuccess,fetchPosts} from '../actions/actions';
@@ -14,16 +15,13 @@ class MainPage extends React.Component{
          onFetchPosts();
       };
 
-    
-
     render(){
 
         return (
         <FlexView column style={{width:'60%', margin: 'auto'}}>
         <Header {...this.props}/>
-       <List {...this.props}  />
-        </FlexView>
-            
+        <List {...this.props}  />
+        </FlexView>   
         )
     }
 }
@@ -43,3 +41,10 @@ const mapStateToProps = state => {
   
   export default connect(mapStateToProps,mapDispatchToProps)(MainPage);
   
+MainPage.propTypes={
+  servers: PropTypes.array.isRequired,
+  filteredServers: PropTypes.array.isRequired,
+  onFetchPosts: PropTypes.func.isRequired,
+  onFetchSingleServerSuccess: PropTypes.func.isRequired
+}
+

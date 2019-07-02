@@ -20,7 +20,6 @@ export const Menu = ({server,turnOnOff,...other}) =>{
        
     
     return (
-      
         server.status==='ONLINE'
         ? (
           <FlexView column className="menu">
@@ -32,12 +31,11 @@ export const Menu = ({server,turnOnOff,...other}) =>{
           <FlexView column className="menu">
           <button onClick={handleOnChange}>Turn on</button>
         </FlexView>
-
     )
     )}
   
 
 Menu.propTypes={
-    turn: PropTypes.func.isRequired,
+    turnOnOff: PropTypes.func.isRequired,
     server: PropTypes.object.isRequired
 }

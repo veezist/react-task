@@ -6,12 +6,9 @@ import MainPage from './MainPage/MainPage';
 
 export class App extends React.Component {
 
-
-
 render()
   {
     return (
-      
       <div  className="App">
         <NavBar/>
         <MainPage/>
