@@ -15,8 +15,8 @@ const allStoreEnhancers = compose(
 
 export const store = createStore(reducer,
     {
-        servers:[{name:'USA'}],
-        filteredServers:[{name:'USA'}]
+        servers:[{id: 1 ,name:'POLAND',status:'ONLINE'}],
+        filteredServers:[{id: 1 ,name:'POLAND',status:'ONLINE'}]
     },
     allStoreEnhancers
     
